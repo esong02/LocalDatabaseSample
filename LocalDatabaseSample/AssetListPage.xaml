@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="LocalDatabaseSample.AssetListPage"
+    BackgroundColor = "Blue"
+    Title = "AssetList">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text = "+"
+            Clicked ="OnItemAdded">
+            <ToolbarItem.Icon>
+                <OnPlatform
+                    x:TypeArguments="FileImageSource"
+                    Android = "plus.png" />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout
+            Orientation = "Vertical"
+            VerticalOptions = "FillAndExpand"
+            HorizontalOptions = "FillAndExpand">
+        
+            <ListView
+                x:Name="AssetListView"
+                Margin = "10,0,10,0"
+                HasUnevenRows = "true"
+                VerticalOptions = "FillAndExpand"
+                HorizontalOptions = "FillAndExpand"
+                ItemSelected = "OnListItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                CornerRadius = "10"
+                                BackgroundColor = "White"
+                                VerticalOptions = "FillAndExpand"
+                                HorizontalOptions = "FillAndExpand"
+                                Margin = "0,10,0,10"
+                                Padding = "10,10,10,10">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height = "Auto"/>
+                                        <RowDefinition Height = "Auto"/>
+                                        <RowDefinition Height = "Auto"/>
+                                        <RowDefinition Height = "Auto"/>
+                                        <RowDefinition Height = "Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width = "*" />
+                                        <ColumnDefinition Width = "*" />
+                                        <ColumnDefinition Width = "*" />
+                                        <ColumnDefinition Width = "*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label
+                                        Text = "{Binding Name}"
+                                        TextColor = "Black"
+                                        FontSize = "20"
+                                        FontAttributes = "Bold"
+                                        Grid.ColumnSpan = "4"
+                                        Grid.Row = "0"
+                                        Grid.Column = "0" />
+                                    
+                                    <Label
+                                        Text = "{Binding ComponentCount, StringFormat = '{0} Components'}"
+                                        TextColor = "Green"
+                                        Grid.ColumnSpan = "3"
+                                        Grid.Row = "1"
+                                        Grid.Column = "0" />
+
+                                    <Label
+                                        Text = "{Binding Id, StringFormat = 'ID: {0}'}"
+                                        HorizontalOptions = "EndAndExpand"
+                                        Grid.Row = "1"
+                                        Grid.Column = "3"/>
+
+                                    <Label
+                                        Text = "{Binding Address, StringFormat = 'Address: {0}'}"
+                                        TextColor = "Black"
+                                        Margin = "5,0,0,0"
+                                        FontSize = "14"
+                                        LineBreakMode = "WordWrap"
+                                        Grid.Row = "2"
+                                        Grid.Column = "0"
+                                        Grid.ColumnSpan = "4"/>
+
+                                    <Label
+                                        Text = "{Binding InpsectionString, StringFormat = 'Inspection Type: {0}'}"
+                                        TextColor = "Black"
+                                        Margin = "5,0,0,0"
+                                        IsVisible = "{Binding HasInspectionType}"
+                                        Grid.Row = "3"
+                                        Grid.Column = "0"
+                                        Grid.ColumnSpan = "4"/>
+
+                                    <Button
+                                        Text = "View"
+                                        TextColor = "Black"
+                                        Margin = "10,0,0,0"
+                                        BackgroundColor = "Gray"
+                                        Clicked = "Inspection_Clicked"
+                                        Grid.Row = "4"
+                                        Grid.Column = "0"
+                                        Grid.ColumnSpan = "3"/>
+                                    
+                                    <Image
+                                        Source = "{Binding ProgressIcon}"
+                                        WidthRequest = "20"
+                                        HeightRequest = "20"
+                                        Aspect = "AspectFit"
+                                        Grid.Row = "4"
+                                        Grid.Column = "3" />
+                                    
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button
+                Text = "Reset"
+                TextColor = "White"
+                BackgroundColor = "Red"
+                Clicked = "Reset_Clicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
