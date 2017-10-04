@@ -20,11 +20,8 @@ namespace LocalDatabaseSample.Models
         public string InspectionString { get; set; }
         public bool HasInspectionType { get; set; }
         public string ProgressIcon { get; set; }
-        public int ComponentCount { get; set; }
-
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Component> ComponentList { get; set; }
-
     }
 }
